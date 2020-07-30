@@ -1,0 +1,15 @@
+type Contact {
+  firstName: String!
+  lastName: String!
+  age: Int!
+  address: String!
+  city: String!
+  state: String!
+  zip: Int!
+  email: String!
+  phone: String!
+}
+
+type Query {
+  allContacts: [Contact!]!
+}
