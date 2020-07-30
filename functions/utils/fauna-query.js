@@ -10,7 +10,7 @@ async function query({ query, variables = {} }) {
     },
     body: JSON.stringify({ query, variables }),
   }).then(response => response.json())
-  return result.data
+  return result
 }
 
 exports.query = query

@@ -27,7 +27,7 @@ exports.handler = async event => {
     phone,
   } = JSON.parse(event.body)
 
-  const result = await query({
+  const { data, errors } = await query({
     query: ADD_CONTACT,
     variables: {
       firstName,
@@ -42,8 +42,16 @@ exports.handler = async event => {
     },
   })
 
+  if (errors) {
+    console.error(errors)
+    return {
+      statusCode: 500,
+      body: JSON.stringify(errors),
+    }
+  }
+
   return {
-    statusCode: 200,
-    body: JSON.stringify(result),
+    statusCode: 201,
+    body: JSON.stringify(data),
   }
 }
