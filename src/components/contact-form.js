@@ -33,8 +33,7 @@ const ContactForm = props => {
       age,
     } = e.target
 
-    // await fetch('/.netlify/functions/add-contact', {
-    await fetch('http://localhost:8888/.netlify/functions/add-contact', {
+    await fetch('/.netlify/functions/add-contact', {
       method: 'POST',
       body: JSON.stringify({
         firstName: firstName.value,
