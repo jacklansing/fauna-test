@@ -24,12 +24,12 @@ const ContactForm = props => {
     const {
       firstName,
       lastName,
-      address,
+      street,
       city,
       state,
       email,
       phone,
-      zip,
+      zipCode,
       age,
     } = e.target
 
@@ -39,10 +39,10 @@ const ContactForm = props => {
         firstName: firstName.value,
         lastName: lastName.value,
         age: parseInt(age.value),
-        address: address.value,
+        street: street.value,
         city: city.value,
         state: state.value,
-        zip: parseInt(zip.value),
+        zipCode: zipCode.value,
         email: email.value,
         phone: phone.value,
       }),
@@ -66,12 +66,12 @@ const ContactForm = props => {
     >
       <TextField id="firstName" label="First Name" />
       <TextField id="lastName" label="Last Name" />
-      <TextField id="address" label="Address" style={{ width: '50ch' }} />
+      <TextField id="street" label="Street" style={{ width: '50ch' }} />
       <TextField id="city" label="City" />
       <TextField id="state" label="State" />
       <TextField id="email" label="Email" />
       <TextField id="phone" label="Phone" />
-      <TextField id="zip" label="Zip" />
+      <TextField id="zipCode" label="Zip" />
       <TextField id="age" label="Age" />
       <Button
         color="primary"

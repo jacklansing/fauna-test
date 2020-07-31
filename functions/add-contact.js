@@ -1,28 +1,40 @@
 const { query } = require('./utils/fauna-query')
 
-const ADD_CONTACT = `mutation ($firstName: String!, $lastName: String!, $age: Int!, $address: String!, $city: String!, $state: String!, $zip: Int!, $email: String!, $phone: String!) {
-  createContact(data: { firstName: $firstName, lastName: $lastName, age: $age, address: $address, city: $city, state: $state, zip: $zip, email: $email, phone: $phone }) {
-    firstName,
-    lastName,
-    age,
-    address,
-    city,
-    state,
-    zip,
-    email,
-    phone
-  }
-}`
+const ADD_CONTACT = `
+  mutation(
+    $firstName: String!
+    $lastName: String!
+    $age: Int!
+    $street: String!
+    $city: String!
+    $state: String!
+    $zipCode: String!
+    $email: String!
+    $phone: String!
+  ) {
+    createContact(
+      data: {
+        firstName: $firstName
+        lastName: $lastName
+        age: $age
+        address: { street: $street, city: $city, state: $state, zipCode: $zipCode }
+        email: $email
+        phone: $phone
+      }
+    ) {
+      _id
+    }
+  }`
 
 exports.handler = async event => {
   const {
     firstName,
     lastName,
     age,
-    address,
+    street,
     city,
     state,
-    zip,
+    zipCode,
     email,
     phone,
   } = JSON.parse(event.body)
@@ -33,10 +45,10 @@ exports.handler = async event => {
       firstName,
       lastName,
       age,
-      address,
+      street,
       city,
       state,
-      zip,
+      zipCode,
       email,
       phone,
     },

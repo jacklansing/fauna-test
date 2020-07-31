@@ -1,13 +1,17 @@
-type Contact {
+type Contact @collection(name: "contacts") {
   firstName: String!
   lastName: String!
   age: Int!
-  address: String!
-  city: String!
-  state: String!
-  zip: Int!
+  address: Address
   email: String!
   phone: String!
+}
+
+type Address @embedded {
+  street: String!
+  city: String!
+  state: String!
+  zipCode: String!
 }
 
 type Query {
