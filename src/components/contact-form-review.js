@@ -2,16 +2,29 @@ import React from 'react'
 import { useStateMachine } from 'little-state-machine'
 import updateAction from './utils/update-action'
 
-import { Card, Typography, Grid, Button, makeStyles } from '@material-ui/core'
+import {
+  Card,
+  Typography,
+  Divider,
+  Button,
+  makeStyles,
+} from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   root: {},
   card: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
+    marginBottom: theme.spacing(2),
   },
   button: {
     width: '100%',
     marginBottom: theme.spacing(1),
+  },
+  container: {
+    marginTop: theme.spacing(2),
+    display: 'grid',
+    gridTemplateColumns: '2fr 4fr',
+    justifyItems: 'start',
   },
 }))
 
@@ -24,23 +37,53 @@ const ContactFormReview = ({ step, setStep }) => {
 
   const finalSubmit = () => {}
 
+  const FieldPreview = ({ label, inputData, noDivider = false }) => {
+    const classes = useStyles()
+
+    return (
+      <>
+        <div className={classes.container}>
+          <Typography component="p" variant="h6">
+            {label}
+          </Typography>
+          <Typography component="p">{inputData}</Typography>
+        </div>
+        {noDivider ? null : <Divider />}
+      </>
+    )
+  }
+
   return (
     <>
-      <pre>{JSON.stringify(state, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
       <Card className={classes.card}>
         <Typography color="textPrimary" variant="h5">
           Contact
         </Typography>
-        <Grid container alignContent="center" justify="center">
-          <Grid item xs={3}>
-            <Typography component="p" variant="h6">
-              First Name
-            </Typography>
-          </Grid>
-          <Grid item xs={9}>
-            <Typography component="p">{state.data.firstName}</Typography>
-          </Grid>
-        </Grid>
+        <FieldPreview label="First Name" inputData={state.data.firstName} />
+        <FieldPreview label="Last Name" inputData={state.data.lastName} />
+        <FieldPreview label="Age" inputData={state.data.age} />
+        <FieldPreview
+          label="Date of Birth"
+          inputData={state.data.dob}
+          noDivider
+        />
+      </Card>
+      <Card className={classes.card}>
+        <Typography color="textPrimary" variant="h5">
+          Address
+          <FieldPreview
+            label="Address Line 1"
+            inputData={state.data.addressPrimary}
+          />
+          <FieldPreview
+            label="Address Line 2"
+            inputData={state.data.addressSecondary}
+          />
+          <FieldPreview label="City" inputData={state.data.city} />
+          <FieldPreview label="State" inputData={state.data.state} />
+          <FieldPreview label="Zip Code" inputData={state.data.zip} noDivider />
+        </Typography>
       </Card>
       <Button
         type="button"
