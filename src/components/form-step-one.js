@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 
 const FormStepOne = ({ step, setStep }) => {
   const { register, handleSubmit } = useForm()
-  const { action } = useStateMachine(updateAction)
+  const { action, state } = useStateMachine(updateAction)
   const classes = useStyles()
 
   if (step !== 1) {
@@ -40,6 +40,7 @@ const FormStepOne = ({ step, setStep }) => {
           label="First Name"
           inputRef={register}
           className={classes.textField}
+          defaultValue={state.data.firstName ? state.data.firstName : ''}
         />
         <TextField
           id="lastName"
@@ -47,6 +48,7 @@ const FormStepOne = ({ step, setStep }) => {
           label="Last Name"
           inputRef={register}
           className={classes.textField}
+          defaultValue={state.data.lastName ? state.data.lastName : ''}
         />
         <TextField
           id="age"
@@ -54,12 +56,15 @@ const FormStepOne = ({ step, setStep }) => {
           label="Age"
           inputRef={register}
           className={classes.textField}
+          defaultValue={state.data.age ? state.data.age : ''}
         />
         <TextField
           id="date"
+          name="dob"
           label="DOB"
           type="date"
-          defaultValue="2000-01-01"
+          inputRef={register}
+          defaultValue={state.data.dob ? state.data.dob : '2000-01-01'}
           className={classes.textField}
           InputLabelProps={{
             shrink: true,

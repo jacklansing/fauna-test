@@ -14,12 +14,13 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     width: '100%',
+    marginBottom: theme.spacing(1),
   },
 }))
 
 const FormStepTwo = ({ step, setStep }) => {
   const { register, handleSubmit } = useForm()
-  const { action } = useStateMachine(updateAction)
+  const { action, state } = useStateMachine(updateAction)
   const classes = useStyles()
 
   if (step !== 2) {
@@ -28,7 +29,7 @@ const FormStepTwo = ({ step, setStep }) => {
 
   const onSubmit = data => {
     action(data)
-    setStep(-1)
+    setStep(3)
   }
 
   return (
@@ -40,6 +41,9 @@ const FormStepTwo = ({ step, setStep }) => {
           label="Address Line 1"
           inputRef={register}
           className={classes.textField}
+          defaultValue={
+            state.data.addressPrimary ? state.data.addressPrimary : ''
+          }
         />
         <TextField
           id="addressSecondary"
@@ -47,6 +51,9 @@ const FormStepTwo = ({ step, setStep }) => {
           label="Address Line 2"
           inputRef={register}
           className={classes.textField}
+          defaultValue={
+            state.data.addressSecondary ? state.data.addressSecondary : ''
+          }
         />
         <TextField
           id="city"
@@ -54,6 +61,7 @@ const FormStepTwo = ({ step, setStep }) => {
           label="City"
           inputRef={register}
           className={classes.textField}
+          defaultValue={state.data.city ? state.data.city : ''}
         />
         <TextField
           id="state"
@@ -62,6 +70,7 @@ const FormStepTwo = ({ step, setStep }) => {
           defaultValue="NY"
           inputRef={register}
           className={classes.textField}
+          defaultValue={state.data.state ? state.data.state : ''}
         />
         <TextField
           id="zip"
@@ -69,14 +78,24 @@ const FormStepTwo = ({ step, setStep }) => {
           label="Zip"
           inputRef={register}
           className={classes.textField}
+          defaultValue={state.data.zip ? state.data.zip : ''}
         />
+        <Button
+          type="button"
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={() => setStep(step - 1)}
+        >
+          back
+        </Button>
         <Button
           type="submit"
           variant="contained"
           color="primary"
           className={classes.button}
         >
-          Submit
+          next
         </Button>
       </Grid>
     </form>
