@@ -57,9 +57,19 @@ const ContactFormReview = ({ step, setStep }) => {
     <>
       {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
       <Card className={classes.card}>
-        <Typography color="textPrimary" variant="h5">
-          Contact
-        </Typography>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography color="textPrimary" variant="h5">
+            Contact
+          </Typography>
+          <Button
+            color="primary"
+            type="button"
+            variant="outlined"
+            onClick={() => setStep(1)}
+          >
+            Edit
+          </Button>
+        </div>
         <FieldPreview label="First Name" inputData={state.data.firstName} />
         <FieldPreview label="Last Name" inputData={state.data.lastName} />
         <FieldPreview label="Age" inputData={state.data.age} />
@@ -70,20 +80,30 @@ const ContactFormReview = ({ step, setStep }) => {
         />
       </Card>
       <Card className={classes.card}>
-        <Typography color="textPrimary" variant="h5">
-          Address
-          <FieldPreview
-            label="Address Line 1"
-            inputData={state.data.addressPrimary}
-          />
-          <FieldPreview
-            label="Address Line 2"
-            inputData={state.data.addressSecondary}
-          />
-          <FieldPreview label="City" inputData={state.data.city} />
-          <FieldPreview label="State" inputData={state.data.state} />
-          <FieldPreview label="Zip Code" inputData={state.data.zip} noDivider />
-        </Typography>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography color="textPrimary" variant="h5">
+            Address
+          </Typography>
+          <Button
+            color="primary"
+            type="button"
+            variant="outlined"
+            onClick={() => setStep(2)}
+          >
+            Edit
+          </Button>
+        </div>
+        <FieldPreview
+          label="Address Line 1"
+          inputData={state.data.addressPrimary}
+        />
+        <FieldPreview
+          label="Address Line 2"
+          inputData={state.data.addressSecondary}
+        />
+        <FieldPreview label="City" inputData={state.data.city} />
+        <FieldPreview label="State" inputData={state.data.state} />
+        <FieldPreview label="Zip Code" inputData={state.data.zip} noDivider />
       </Card>
       <Button
         type="button"
